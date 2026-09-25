@@ -1,6 +1,6 @@
 # DjangoSIGE [![Build Status](https://travis-ci.org/thiagopena/djangoSIGE.svg?branch=master)](https://travis-ci.org/thiagopena/djangoSIGE)
 
-Sistema Integrado de Gestão Empresarial baseado em Django
+Sistema Integrado de Gestão Empresarial baseado em Django.
 
 Projeto independente open-source desenvolvido em Python 3 no Windows, testado no GNU/Linux e Windows.
 
