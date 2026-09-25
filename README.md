@@ -4,6 +4,7 @@ Sistema Integrado de Gestão Empresarial baseado em Django.
 
 Projeto independente open-source desenvolvido em Python 3 no Windows, testado no GNU/Linux e Windows.
 
+
 ## Dependências
 
 - [Python](https://www.python.org/downloads/) — 3.12 (definido em `.python-version` e `pyproject.toml`)
