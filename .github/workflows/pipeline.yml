@@ -1,0 +1,37 @@
+# Consumer workflow for djangoSIGE
+#
+# Drop this file into a djangoSIGE repository's `.github/workflows/` (a fork,
+# since this project doesn't control the upstream `thiagopena/djangoSIGE`). It
+# calls the reusable security pipeline, which then scans THIS calling
+# repository at the triggering ref (local analysis): SAST, SCA and secret
+# scanning, plus DAST when an application URL is provided.
+#
+# Prerequisites in the djangoSIGE repository:
+#   - Code Scanning enabled, so the SAST/SCA SARIF upload succeeds (free for
+#     public repositories; private ones need GitHub Advanced Security).
+#   - Optional secret `NVD_API_KEY`, recommended so Dependency-Check's first
+#     vulnerability-database download isn't slow or rate-limited.
+#
+# The pipeline is pinned to an exact release tag; never use @main.
+
+name: Security (djangoSIGE)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  security:
+    name: Security pipeline
+    # A reusable workflow can never have more permissions than its caller, so
+    # these must be granted here or the SARIF upload fails.
+    permissions:
+      contents: read
+      security-events: write
+    uses: 5n0wz/take-home-devsecops/.github/workflows/security-pipeline.yml@v1.0.0
+    # Optional: enable DAST by pointing at an already running instance
+    # reachable from GitHub-hosted runners.
+    # with:
+    #   applications_url: https://your-djangosige.example.com
+    secrets:
+      NVD_API_KEY: ${{ secrets.NVD_API_KEY }} # optional; or use `secrets: inherit`
